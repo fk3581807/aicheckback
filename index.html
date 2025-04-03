@@ -36,9 +36,13 @@
         }
 
         // Prevent back navigation
-        history.pushState(null, null, location.href);
-        window.onpopstate = function () {
-            history.go(1);
+        window.onload = function() {
+            if (window.history && window.history.pushState) {
+                window.history.pushState(null, null, window.location.href);
+                window.onpopstate = function() {
+                    window.history.pushState(null, null, window.location.href);
+                };
+            }
         };
     </script>
 </body>
